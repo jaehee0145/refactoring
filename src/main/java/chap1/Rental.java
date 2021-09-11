@@ -23,7 +23,7 @@ class Rental {
             case Movie.REGULAR:
                 result += 2;
                 if (get_daysRented() > 2) {
-                    result += (get_daysRented() -2) * 1.5;
+                    result += (get_daysRented() - 2) * 1.5;
                 }
                 break;
             case Movie.NEW_RELEASE:
@@ -37,5 +37,14 @@ class Rental {
                 break;
         }
         return result;
+    }
+
+    int getFrequentRenterPoints() {
+        // 최신물을 이틀 이상 대여하면 보너스 포인트 지급
+        if ((get_movie().get_priceCode() == Movie.NEW_RELEASE) &&
+                get_daysRented() > 1) {
+            return 2;
+        }
+        return 1;
     }
 }
