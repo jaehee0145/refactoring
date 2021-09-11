@@ -26,7 +26,7 @@ class Customer {
             Rental each = (Rental) rentals.nextElement();
 
             // 이번에 대여하는 비디오 정보와 대여료를 출력
-            result += "\t" + each.get_movie().get_title() + "\t" + String.valueOf(each.getCharge()) + "\n";
+            result += "\t" + each.get_movie().getTitle() + "\t" + String.valueOf(each.getCharge()) + "\n";
         }
         // 푸터 행 추가
         result += "누적 대여료: " + String.valueOf(getTotalCharge()) + "\n";
@@ -60,7 +60,7 @@ class Customer {
         while (rentals.hasMoreElements()) {
             Rental each = (Rental) rentals.nextElement();
             // 모든 대여 비디오 정보와 대여료를 출력
-            result += each.get_movie().get_title() + ": " + String.valueOf(each.getCharge()) + "<BR>\n";
+            result += each.get_movie().getTitle() + ": " + String.valueOf(each.getCharge()) + "<BR>\n";
         }
         // 푸터 행 추가
         result += "<P>누적 대여료: <EM>" + String.valueOf(getTotalCharge()) + "</EM><P>\n";
