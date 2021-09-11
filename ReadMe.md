@@ -1,4 +1,4 @@
 ### Refactoring
 
 ---
-[Chap 01 맛보기 예제](/summary/chap01.md)
+[Chap 02 리팩토링 개론](/summary/chap02.md)
