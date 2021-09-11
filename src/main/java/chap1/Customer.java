@@ -29,27 +29,10 @@ class Customer {
             Rental each = (Rental) rentals.nextElement();
 
             // 비디오 종류별 대여료 계산
-            switch (each.get_movie().get_priceCode()) {
-                case Movie.REGULAR:
-                    thisAmount += 2;
-                    if (each.get_daysRented() > 2) {
-                        thisAmount += (each.get_daysRented() -2) * 1.5;
-                    }
-                    break;
-                case Movie.NEW_RELEASE:
-                    thisAmount += each.get_daysRented() * 3;
-                    break;
-                case Movie.CHILDREN:
-                    thisAmount += 1.5;
-                    if (each.get_daysRented() > 3) {
-                        thisAmount += (each.get_daysRented() - 3) * 1.5;
-                    }
-                    break;
-            }
+            thisAmount = amountFor(each);
 
             // 적립 포인트를 1 포인트 증가
             frequentRenterPoints ++;
-            System.out.println("포인트: " + frequentRenterPoints);
             // 최신물을 이틀 이상 대여하면 보너스 포인트 지급
             if ((each.get_movie().get_priceCode() == Movie.NEW_RELEASE) &&
             each.get_daysRented() > 1) {
@@ -66,5 +49,27 @@ class Customer {
         result += "누적 대여료: " + String.valueOf(totalAmount) + "\n";
         result += "적립 포인트: " + String.valueOf(frequentRenterPoints);
         return result;
+    }
+
+    private double amountFor(Rental each) {
+        double thisAmount = 0;
+        switch (each.get_movie().get_priceCode()) {
+            case Movie.REGULAR:
+                thisAmount += 2;
+                if (each.get_daysRented() > 2) {
+                    thisAmount += (each.get_daysRented() -2) * 1.5;
+                }
+                break;
+            case Movie.NEW_RELEASE:
+                thisAmount += each.get_daysRented() * 3;
+                break;
+            case Movie.CHILDREN:
+                thisAmount += 1.5;
+                if (each.get_daysRented() > 3) {
+                    thisAmount += (each.get_daysRented() - 3) * 1.5;
+                }
+                break;
+        }
+        return thisAmount;
     }
 }
