@@ -96,3 +96,16 @@ return (anOrder.basePrice() > 1000)
 - 컴파일, 테스트 
 - 임시변수 선언과 대입문을 삭제  
 - 컴파일, 테스트 
+
+### 임시변수를 메서드 호출로 전환 Replace Temp With Query
+- 수식의 결과를 저장하는 임시변수가 있을 땐 그 수식을 빼내어 메서드로 만든 후, 임시변수 찹조 부분을 전부 수식으로 교체
+
+**[BEFORE]**
+```java
+return (anOrder.basePrice() > 1000)
+```
+
+**[AFTER]**
+```java
+return (anOrder.basePrice() > 1000)
+```
