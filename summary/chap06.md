@@ -1,5 +1,15 @@
 # Chapter 06 메서드 정리
+- 메서드 추출 Extract Method
+- 메서드 내용 직접 삽입 Inline Method
+- 임시변수 내용 직접 삽입 Inline Temp
+- 임시변수를 메서드 호출로 전환 Replace Temp With Query
+- 직관적 임시변수 사용 Introduce Explaining Variable
+- 임시변수 분리 Split Temporary Variable
+- 매개변수로의 값 대입 제거 Remove Assignments to Parameters
+- 메서드를 메서드 객체로 전환 Replace Method with Method Object
+- 알고리즘 전환 Substitute Algorithm
 
+---
 ### 메서드 추출 Extract Method
 - 어떤 코드를 그룹으로 묶어도 되겠다고 판단될 때 그 코드를 빼내어 목적을 잘 나타내는 직관적 이름의 메서드로 만들자.  
 
@@ -42,6 +52,7 @@ void printDetails(double amount) {
 - 빼낸 코드에서 읽어들인 지역변수를 대상 메서드에 배개변수로 전달 
 - 컴파일 테스트 
 
+---
 ### 메서드 내용 직접 삽입 Inline Method
 - 메서드 기능이 너무 단순해서 메서드명만 봐도 너무 뻔할 땐 그 메서드의 기능을 호출하는 메서드에 넣어버리고 그 메서드는 삭제
 
@@ -71,7 +82,7 @@ int getRating() {
 - 각 호출 부분을 메서드 내용으로 교체
 - 테스트 
 - 메서드 정의 삭제  
-
+---
 ### 임시변수 내용 직접 삽입 Inline Temp
 - 간단한 수식을 대입받는 임시변수로 인해 다른 리팩토링 기법 적용이 힘들 땐 그 임시변수를 참조하는 부분을 수식으로 치환하자
 
@@ -96,7 +107,7 @@ return (anOrder.basePrice() > 1000)
 - 컴파일, 테스트 
 - 임시변수 선언과 대입문을 삭제  
 - 컴파일, 테스트 
-
+---
 ### 임시변수를 메서드 호출로 전환 Replace Temp With Query
 - 수식의 결과를 저장하는 임시변수가 있을 땐 그 수식을 빼내어 메서드로 만든 후, 임시변수 찹조 부분을 전부 수식으로 교체
 
@@ -137,7 +148,7 @@ private double basePrice() {
   - 추출 메서드에 문제가 없는지 (즉, 객체를 변경하진 않는지) 확인하자. 만약 객체 변경 등의 문제가 있으면 상태변경 메서드와 값 반환 메서드를 분리기법 실시
 - 컴파일, 테스트
 - 임시변수를 대상으로 임시변수 내용 직접 삽입 기법을 실시 
-
+---
 ### 직관적 임시변수 사용 Introduce Explaining Variable
 - 사용된 수식이 복잡할 땐 수식의 결과나 수식의 일부분을 용도에 부합하는 직관적 이름의 임시변수에 대입하자
 
@@ -170,7 +181,7 @@ if (isMacOs && isIEBrowser && wasInitialized() && wasResized) {
 - 수식에서 한 부분의 결과를 임시변수 값으로 교체
 - 컴파일, 테스트
 - 다른 부분을 대상으로 반복  
-
+---
 ### 임시변수 분리 Split Temporary Variable
 - 루프 변수나 값 누적용 임시변수가 아닌 임시변수에 여러 번 값이 대입될 땐 각 대입마다 다른 임시변수를 사용하자.
 
@@ -228,7 +239,7 @@ void aMethod(Object foo) {
 - 매개변수 값을 대입하는 코드 뒤에 나오는 매개변수 참조를 전부 임시변수로 수정
 - 매개변수로의 값 대입을 임시변수로의 값 대입으로 수정
 - 컴파일, 테스트
-
+---
 ### 메서드를 메서드 객체로 전환 Replace Method with Method Object
 - 지역변수 때문에 메서드 추출을 적용할 수 없는 긴 메서드가 있을땐 메서드 자체를 객체로 전환해서 모든 지역변수를 객체의 필드로 만들자.
 
@@ -240,7 +251,7 @@ void aMethod(Object foo) {
 - 원본 메서드 내용을 compute 메서드 안에 복사해 넣자. 원본 객체에 있는 메서드를 호출할 땐 원본 객체를 나타내는 필드를 사용하자.
 - 컴파일
 - 원본 메서드를 새 객체 생성과 compute 메서드 호출을 담당하는 메서드로 바꾸자
-
+---
 ### 알고리즘 전환 Substitute Algorithm
 - 알고리즘을 더 분명한 것으로 교체해야 할 땐 해당 메서드의 내용을 새 알고리즘으로 바꾸자.
 
