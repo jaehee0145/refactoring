@@ -138,12 +138,38 @@ private double basePrice() {
 - 컴파일, 테스트
 - 임시변수를 대상으로 임시변수 내용 직접 삽입 기법을 실시 
 
+### 직관적 임시변수 사용 Introduce Explaining Variable
+- 사용된 수식이 복잡할 땐 수식의 결과나 수식의 일부분을 용도에 부합하는 직관적 이름의 임시변수에 대입하자
+
+**[BEFORE]**
+```java
+if ((platform.toUpperCase().indexOf("MAC") > -1) &&
+        browser.toUpperCase().indexOf("IE") > -1) &&
+        wasInitialized() && resize > 0 ) {
+    //   기능 코드
+}
+```
+
+**[AFTER]**
+```java
+final boolean isMacOs = platform.toUpperCase().indexOf("MAC") > -1;
+final boolean isIEBrowser = browser.toUpperCase().indexOf("IE") > -1;
+final boolean wasResized = resize > 0;
+if (isMacOs && isIEBrowser && wasInitialized() && wasResized) {
+    //   기능 코드
+}
+```
+
+**동기**
+- 수식이 너무 복잡해서 이해하기 힘들면 임시변수를 사용
+- 되도록이면 사용을 자제하고 메서드 추출을 사용하는 것이 좋다.
 
 
-
-
-
-
+**방법**
+- 임시변수를 final로 선언하고, 복잡한 수식에서 한 부분의 결과를 임시변수에 대입
+- 수식에서 한 부분의 결과를 임시변수 값으로 교체
+- 컴파일, 테스트
+- 다른 부분을 대상으로 반복  
 
 
 
