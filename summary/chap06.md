@@ -241,6 +241,66 @@ void aMethod(Object foo) {
 - 컴파일
 - 원본 메서드를 새 객체 생성과 compute 메서드 호출을 담당하는 메서드로 바꾸자
 
+### 알고리즘 전환 Substitute Algorithm
+- 알고리즘을 더 분명한 것으로 교체해야 할 땐 해당 메서드의 내용을 새 알고리즘으로 바꾸자.
+
+**[BEFORE]**
+```java
+String foundPerson(String[] people) {
+    for (int i = 0; i < people.length; i++) {
+        if (people[i].equals("DON")) {
+            return "DON";
+        }
+        if (people[i].equals("JOHN")) {
+            return "JOHN";
+        }
+    }
+    return "";
+}
+```
+
+**[AFTER]**
+```java
+String foundPerson(String[] people){
+    List candidates = Arrays.asList(new String[] {"DON", "JOHN", "KENT"});
+    for (int i = 0; i < people.length; i++) {
+        if (candidates.contains(people[i]))
+            return people[i];
+    }
+    return "";
+}
+```
+
+**방법**
+- 교체할 간결한 알고리즘을 준비, 컴파일
+- 테스트
+- 결과가 다르게 나오면 디버깅
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
