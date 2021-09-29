@@ -102,10 +102,51 @@ return (anOrder.basePrice() > 1000)
 
 **[BEFORE]**
 ```java
-return (anOrder.basePrice() > 1000)
+double basePrice = _quantity * _itemPrice;
+if (basePrice > 1000) {
+    return basePrice * 0.95;
+} else {
+    return basePrice * 0.95;
+}
 ```
 
 **[AFTER]**
 ```java
-return (anOrder.basePrice() > 1000)
+if (basePrice() > 1000) {
+    return basePrice() * 0.95;
+} else {
+    return basePrice() * 0.95;
+}
+private double basePrice() {
+    return _quantity * _itemPrice
+}
 ```
+
+**동기**
+- 임시변수는 일시적이고 국소적 범위로 제한된다는 단점이 있다.
+- 메서드 호출로 수정하면 클래스 안 모든 메서드가 그 정보에 접근할 수 있다. 
+- 지역변수가 많을수록 메서드 추출이 힘들어지므로 보통 메서드 추출을 적용하기 전에 하게된다. 
+
+**방법**
+- 값이 한 번만 대입되는 임시변수를 찾자
+  - 값이 여러 번 대입되는 임시변수가 있으면 임시변수 분리 기법을 고려
+- 그 임시변수를 final로 선언
+- 컴파일 (이것으로 임시변수에 값을 한 번만 대입할 수 있다.)
+- 대입문 우변을 빼내어 메서드로 만들자
+  - 처음엔 메서드를 private으로 선언, 호출 범위가 넓어지면 접근 제한을 완화하기
+  - 추출 메서드에 문제가 없는지 (즉, 객체를 변경하진 않는지) 확인하자. 만약 객체 변경 등의 문제가 있으면 상태변경 메서드와 값 반환 메서드를 분리기법 실시
+- 컴파일, 테스트
+- 임시변수를 대상으로 임시변수 내용 직접 삽입 기법을 실시 
+
+
+
+
+
+
+
+
+
+
+
+
+
