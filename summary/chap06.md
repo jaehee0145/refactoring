@@ -190,6 +190,53 @@ final doublie area = height * width;
 System.out.println(area);
 ```
 
+### 매개변수로의 값 대입 제거 Remove Assignments to Parameters
+- 매개변수로 값을 대입하는 코드가 있을 때 매개변수 대신 임시변수를 사용하게 수정하자.
+
+**[BEFORE]**
+```java
+int discount (int inputVal, int quantity, int yearToDate) {
+    if (inputVal > 50) inputVal -= 2;
+}
+```
+
+**[AFTER]**
+```java
+int discount (int inputVal, int quantity, int yearToDate) {
+    int result = inputVal;
+    if (inputVal > 50) result -= 2;
+}
+```
+
+**동기**
+ ```java
+void aMethod(Object foo) {
+    foo.modifyInSomeWay();  // ok
+    foo = anotherObject;    // not ok - foo의 값에 다른 객체 참조를 대입
+}
+```
+- 전달받은 매개변수에 다른 객체 참조를 대입하면 
+  - 코드의 명료성이 떨어진다.
+  - '값을 통한 전달'과 '참조를 통한 전달'을 혼동하게 된다.
+    - 자바는 '값을 통한 전달'만 사용한다.
+      - 값을 통한 전달: 어떠한 매개변수 값 변화도 호출한 루틴에 반영되지 않는다. ??
+  - 메서드 안의 코드 자체도 혼동된다.
+    - 용도의 일관성
+
+**방법**
+- 매개변수 대신 사용할 임시변수를 선언
+- 매개변수 값을 대입하는 코드 뒤에 나오는 매개변수 참조를 전부 임시변수로 수정
+- 매개변수로의 값 대입을 임시변수로의 값 대입으로 수정
+- 컴파일, 테스트
+
+
+
+
+
+
+
+
+
 
 
 
