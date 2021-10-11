@@ -1,6 +1,6 @@
 package chap07;
 
-public class Person {
+public class ExtractClass {
     public String getName() {
         return name;
     }
