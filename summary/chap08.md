@@ -177,6 +177,55 @@ _그 데이터를 도메인 객체로 복사하고, 양측의 데이터를 동�
 - 관측 인터페이스의 update 메서드를 도메인 필드에서 GUI 컨트롤로 데이터를 복사하게 수정하자  
 - 컴파일, 테스트 
 
+---
+## 클래스의 단방향 연결을 양방향으로 전환 Change Unidirectional Association to Bidirectional
+- 두 클래스가 서로의 기능을 사용해야 하는데 한 방향으로만 연결되어 있을 땐 역 포인터를 추가하고 두 클래스를 모두 업데이트할 수 있게 접근 한정자를 수정하자  
+
+___
+## 마법 숫자를 기호 상수로 전환 Replace Magic Number with Symbolic Constant
+- 특수 의미를 지닌 리터럴 숫자가 있을 땐 의미를 살린 이름의 상수를 작성한 후 리터럴 숫자를 그 상수로 교체하자 
+
+**[BEFORE]**
+```java
+double potentialEnergy(double mass, double height) {
+    return mass * 9.81 * height;
+}
+```
+**[AFTER]**
+```java
+double potentialEnergy(double mass, double height) {
+    return mass * GRAVITATIONAL_CONSTANT * height;
+}
+static final double GRAVITATIONAL_CONSTANT = 9.81;
+```
+
+---
+## 필드 캡슐화 Encapsulate Field
+- public 필드가 있을 땐 그 필드를 private로 만들고 필드용 읽기 메서드오 쓰기 메서드를 작성하자 
+
+**[BEFORE]**
+```java
+public String name;
+```
+**[AFTER]**
+```java
+private String name;
+public String getName() {return name;}
+public void setName(String arg) {name = arg;}
+```
+
+## 동기  
+- 객체지향의 주요 원칙 중 하나는 캡슐화(데이터 은닉)
+  - 데이터는 절대로 public 타입으로 선언하면 안된다. 
+  - 데이터를 public 타입으로 만들면 데이터가 있는 객체가 모르는 사이에 다른 객체가 값을 읽고 변경할 수 있다. 
+- 프로그램의 모듈성을 저하시키는 것이 문제
+  - 데이터와 데이터를 사용하는 기능이 한 곳에 있어야 코드를 수정하기 쉽다.
+- 필드 캡슐화 과정의 첫 단계는 데이터를 은닉하고 읽기/쓰기 메서드를 추가하는 것  
+  - 읽기 메서드와 쓰기 메서드만 있는 클래스는 객체의 장점을 전혀 활용하지 않아서 객체라는 이름이 아까운 dumb class 
+  - 필드 캡슐화를 적용한 후엔 새 메서드를 사용하는 메서드를 찾아 그 메서드를 묶어서 가단한 메서드 이동을 적용해 새 객체로 옮겨도 괜찮을지 확인
+
+
+
 
 
 
