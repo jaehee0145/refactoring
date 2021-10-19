@@ -63,9 +63,15 @@ else charge = summerCharge(quantity);
 ### 방법
 - 논리문을 빠져나오게 하는 제어 플래그 값을 찾자 
 - 그 제어 플래그 값을 대입하는 코드를 break나 continue로 바꾸자
-- 컴파일, 테스트  
-- 
+- 컴파일, 테스트
 
+---
+## 여러 겹의 조건문을 감시 절로 전환 Replace Nested Conditional with Guard Clauses
+- 메서드에 조건문이 있어서 정상적인 실행 경로를 파악하기 힘들 땐 모든 특수한 경우에 감시 절을 사용하자  
+
+### 동기
+- if - else : 둘 다 정상 동작일때
+- 감시절 : 특이한 조건일때 
 
 
 
