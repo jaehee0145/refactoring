@@ -70,7 +70,37 @@ ___
 - 원본 메서드를 void 타입으로 수정하고 return 문 삭제 
 
 
+---
+## 메서드를 매개변수로 전환 Parameterize Method
+- 여러 메서드가 기능은 비슷하고 안에 든 값만 다를 땐 서로 다른 값을 하나의 매개변수로 전달받는 메서드를 하나 작성하자.
 
+---
+## 매개변수를 메서드로 전환 Replace Parameter with Explicit Methods
+- 매개변수로 전달된 값에 따라 메서드가 다른 코드를 실행할 땐 그 매개변수로 전달될 수 있는 모든 값에 대응하는 메서드를 각각 작성하자.
+
+### 동기
+- 이 리팩토링 기법은 일반적으로 한 매개변수의 값이 여러 개가 될 수 있을 때 조건문 안에서 각 값을 검사하여 다른 기능을 수행하는 메서드에 적용  
+
+---
+## 객체를 통째로 전달 Preserve Whole Object
+- 객체에서 가져온 여러 값을 메서드 호출에서 매개변수로 전달할 땐 그 객ㄱ체를 통째로 전달하게 수정하자.
+[BEFORE]
+```java
+int low = daysTempRange().getLow();
+int high = daysTempRange().getHign();
+withinPlan = plan.withinRange(low, high);
+```
+[AFTER]
+```java
+withinPlan = plan.withinRange(daysTempRange());
+```
+
+### 동기
+- 장점
+  - 매개변수 세트 변경의 편의성 뿐 아니라 코드를 알아보기도 쉬워진다.
+- 단점
+  - 통 객체를 전달하면 통 객체와 호출된 객체가 서로 의존하게 된다.
+  - 이것이 의존성 구조를 망가뜨릴 것 같으면 사용하면 안되는 방법
 
 
 
