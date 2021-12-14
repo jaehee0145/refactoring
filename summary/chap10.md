@@ -158,8 +158,37 @@ withinPlan = plan.withinRange(daysTempRange());
 - 각 메서드를 가능하면 private 타입으로 만들자
 - private 타입으로 만들때마다 테스트를 실시
 
+--
+## 생성자를 팩토리 메서드로 전환 Replace constructor with Factory Method
+- 객체를 생성할 때 단순한 생성만 수행하게 해야 할 땐 생성자를 팩토리 메서드로 교체하자
 
+[BEFORE]
+```java
+Employee (int type) {
+    this.type = type;
+}
+```
+[AFTER]
+```java
+static Employee create(int type) {
+    return new Employee(type);
+}
+```
 
+### 동기
+- 가장 확실한 상황 : 분류 부호를 하위클래스로 바꿀 때 
+  - 분류 부호를 사용해 작성한 객체가 있는데 하위클래스가 필요해진 경우
+    - 어느 하위 클래스를 사용할지는 분류 부호에 따라 달라지는데 생성자는 요청된 객체의 인스턴스만 반환할 수 있으니
+    - 생성자를 팩토리 메서드로 바꿔야 한다.  
+- 생성자가 너무 제한되는 상황에서도 사용
+  - 팩토리 메서드는 값을 참조로 전환을 실시하기 위해 꼭 필요하다.
+
+### 방법 
+- 팩토리 메서드 작성. 그 메서드의 내용을 기존의 생성자 호출로 수정
+- 모든 생성자 호출을 팩토리 메서드 호출로 바꾸자.
+- 컴파일, 테스트
+- 생성자를 private으로 선언
+- 컴파일
 
 
 
