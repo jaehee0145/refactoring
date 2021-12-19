@@ -190,7 +190,8 @@ static Employee create(int type) {
 - 생성자를 private으로 선언
 - 컴파일
 
---
+---
+
 ## 하향 타입 변환을 캡슐화 Encapsulate Downcast
 - 메서드가 반환하는 객체를 호출 부분에서 하향 타입 변환해야 할 땐 하향 타입 변환 기능을 메서드 안으로 옮기자
 [BEFORE]
