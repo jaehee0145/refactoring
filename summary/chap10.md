@@ -206,6 +206,40 @@ Reading lastReading() {
     return (Reading) readings.lastElement();
 }
 ```
+---
+## 에러 부호를 예외 통지로 교체 Replace Error Code with Exception 
+- 메서드가 에러를 나타내는 특수한 부호를 반환할 땐 그 부호 반환 코드를 예외 통지 코드로 바꾸자 
+
+[BEFORE]
+```java
+int withdraw(int amount) {
+    if (amount > balance) {
+        return -1;  
+    } else {
+      balance -= amount;
+      return 0;
+    }
+}
+```
+[AFTER]
+```java
+int withdraw(int amount) throws BalnaceException {
+    if (amount > balance) throw new BalanceException();
+    balance -= amount;
+}
+```
+
+### 동기
+- 예외는 에러 처리를 일반적인 처리와 확실히 분리시키기 때문에 좋다.
+
+### 방법
+- 확인된 예외와 미확인 예외 중 어느 것을 사용해야 할지 판단한다
+  - 호출 전에 호출하는 부분이 조건을 검사해야 한다면 미확인 예외
+  - 예외가 확인된 것이라면 새 예외를 작성하거나 기존 예외를 사용 
+- 호출 부분을 전부 찾아서 그 예외를 사용하게 수정
+  - 미확인 예외일 땐 호출 부분이 메서드 호출 전에 적절한 검사를 하게 하자
+  - 확인된 예외일 땐 호출 부분이 try절 안에서 메서드를 호출하게 하자 
+- 메서드 시그니처를 수정해서 새로운 용도를 반영하자
 
 
 
