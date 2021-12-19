@@ -241,6 +241,31 @@ int withdraw(int amount) throws BalnaceException {
   - 확인된 예외일 땐 호출 부분이 try절 안에서 메서드를 호출하게 하자 
 - 메서드 시그니처를 수정해서 새로운 용도를 반영하자
 
+---
+## 예외 처리를 테스트로 교체 Replace Exception with Test
+- 호출 부분에 사전 검사 코드를 넣으면 될 상황인데 예외 통지를 사용했을 땐 호출 부분이 사전 검사를 실시하게 수정하자
+
+
+[BEFORE]
+```java
+double getValueForPeriod (int periodNumber) {
+    try {
+        return values[periodNumber];    
+    } catch (ArrayIndexOutOfBoundsException e) {
+        return 0;    
+    }
+}
+```
+[AFTER]
+```java
+double getValueForPeriod (int periodNumber) {
+    if (periodNumber >= values.length) return 0;
+    return values[periodNumber];
+}
+```
+### 동기
+- 예외 처리를 조건문 대용으로 사용해선 안된다.
+
 
 
 
