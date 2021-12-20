@@ -47,6 +47,34 @@
 - 상위클래스 안에 새 메서드를 작성하고 새 메서드 안에 같은 메서드의 내용을 복사 
 - 하위클래스 메서드 삭제
 
+---
+## 생성자 내용 상향 Pull Up Constructor Body
+- 하위클래스마다 거의 비슷한 내용의 생성자가 있을 땐 상위클래스에 생성자를 작성하고, 그 생성자를 하위 클래스의 메서드에서 호출하자
+[BEFORE]
+```java
+Class Manager extends Employee...
+    public Manager (String name, String id, int grade) {
+        this.name = name;
+        this.id = id;
+        this.grade = grade;
+    }
+```
+[AFTER]
+```java
+public Manager (String name, String id, int grade) {
+    super(name, id);
+    this.grade = grade;
+}
+```
+### 동기
+- 생성자는 상속이 불가능하기 때문에 메서드 상향을 적용할 수 없다.
+- 상위클래스의 생성자 메서드를 하위클래스가 호출하게 해야 한다.
+
+### 방법
+- 상위클래스에 생성자를 정의
+- 하위클래스 생성자에서 앞 부분의 공통적인 코드를 상위클래스 생성자 안으로 옮기자
+- 하위클래스 생성자 안의 맨 앞에 상위클래스 생성자 호출 코드를 넣자 
+- 컴파일, 테스트 
 
 
 
